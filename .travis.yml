@@ -1,7 +1,7 @@
 os: osx
 osx_image: xcode8
 language: c
-script: make
+script: make m32 m64
 before_deploy:
 - git config --local user.name "autobot"
 - git config --local user.email "autobot@donotreply.com"
