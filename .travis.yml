@@ -2,3 +2,18 @@ os: osx
 osx_image: xcode8
 language: c
 script: make
+before_deploy:
+- git config --local user.name "autobot"
+- git config --local user.email "autobot@donotreply.com"
+- export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+- git tag $TRAVIS_TAG
+deploy:
+  provider: releases
+  api_key:
+    secure: l+vfcz2zvW0p/Mlx1R0kAF3ECDDe0VYCMWucPj+C4+y3+ITp1WOysN/EGVp8C+i26k1LgcbBXtt7K5L9rF313t16+EOwp23FO5p8KKDuuZCYDdq1tvUT/yOt9vlhs0O5weX9IE2xmUiXyDFkC4BvSqaBFoi9gyUO2+D9HT59NdWwFrzf4GIMugxgcmdYPhl1i2WLUJacMMohbm3b0VRaueV1va9Tvt3/WrOpg5AjayEVaIEXy5X4FXYThbN5WD5o07lHUr8upXlM5Pzohvxxc0k+W1kciKNGMZeXXz6z2ntj1G2wTR7jVWmTjWvX1wBPcMNRMPzv5QiGEbsORHF4miG0mCfcK+LVUxpdpfgy1XdU1Lxc2ktb6z5rT33xGHuph8BgvbdNwCLIRIzhsn9rTJbf1RzpjpV+2P7E8oMh74pJDgwwfZgZfnI3hqiWZUEwLBIk5VFe35++IIEoaxhC8wwBnOyljYAXkg+n5DKEN3yvgDWSp/Vz2K6FXsn/h1PGCPdjX+mbyaQZWTL1rPyfvC+QUG15eu/iUtxIryp3zUe692ewHWWo8WINxza2Bjms5ebRutfJZczCga7A85QqiBcqZQOiVQN6g73ufEqx0gObODC+8OKQLmMqV4m0nqX/4Jn25zlDPiwQWZoWW3EOMzLa1lvLV6sfgSBV5HGq/Ow=
+  file:
+    - "m32"
+    - "m64"
+  on:
+    repo: CharlesSkelton/test
+  skip_cleanup: 'true'
