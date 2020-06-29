@@ -1,3 +1,3 @@
 l64:
-	gcc48 -o l64 main.c
+	gcc-4.8 -o l64 main.c
 	./l64
